@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSTV - Streaming Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #f5f5f7;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #f5f5f7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem;
+            background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #a8a8a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #86868b;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 980px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #f5f5f7;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #86868b;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #f5f5f7;
+        }
+
+        .feature-card p {
+            color: #86868b;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(102, 126, 234, 0.05) 50%, transparent 100%);
+        }
+
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .product-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card .price {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+        }
+
+        .product-card .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            -webkit-text-fill-color: #86868b;
+        }
+
+        .product-card .description {
+            color: #86868b;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-card a {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 980px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .product-card a:hover {
+            background: rgba(102, 126, 234, 0.3);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #86868b;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #86868b;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 4rem 1.5rem;
+            }
+            
+            .features, .products, .cta-section {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">DSTV</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#caracteristicas">Características</a></li>
+                <li><a href="https://2tb.cl/admin/crm_drilldown.php" target="_blank">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Streaming Premium al Mejor Precio</h1>
+            <p>Netflix, Disney+, HBO Max, Prime Video y más. Todo lo que necesitás en un solo lugar.</p>
+            <a href="#productos" class="cta-button">Ver Productos</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="caracteristicas">
+        <h2 class="section-title">¿Por qué elegirnos?</h2>
+        <p class="section-subtitle">La mejor experiencia de streaming con soporte 24/7</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Activación Instantánea</h3>
+                <p>Recibí tus cuentas al instante después del pago. Sin esperas, sin complicaciones.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Garantía Total</h3>
+                <p>Todas nuestras cuentas incluyen garantía. Si hay algún problema, lo resolvemos al instante.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Mejores Precios</h3>
+                <p>Los precios más competitivos del mercado. Calidad premium a precios accesibles.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎧</div>
+                <h3>Soporte 24/7</h3>
+                <p>Equipo de soporte disponible las 24 horas para ayudarte con cualquier consulta.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Multi-Dispositivo</h3>
+                <p>Compatible con Smart TV, celular, tablet, PC y decodificadores.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Pago Seguro</h3>
+                <p>Múltiples métodos de pago seguros: transferencia bancaria y pago online.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="productos">
+        <div class="products-container">
+            <h2 class="section-title">Nuestros Productos</h2>
+            <p class="section-subtitle">Elige el plan que mejor se adapte a vos</p>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-emoji">🔴</div>
+                    <h3>Netflix</h3>
+                    <div class="price">$3.200 <span>/mes</span></div>
+                    <p class="description">Perfil completo para TV/Decodificador</p>
+                    <a href="https://dstv.store.link/product/netflix/netflix">Comprar</a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-emoji">🏰</div>
+                    <h3>Disney+</h3>
+                    <div class="price">$3.500 <span>/mes</span></div>
+                    <p class="description">Perfil completo con ESPN incluido</p>
+                    <a href="https://dstv.store.link/product/disney-pantalla/disney-pantalla">Comprar</a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-emoji">🔹</div>
+                    <h3>Prime Video</h3>
+                    <div class="price">$2.990 <span>/mes</span></div>
+                    <p class="description">Perfil completo Amazon Prime</p>
+                    <a href="https://dstv.store.link/product/prime-video-x-perfil/prime">Comprar</a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-emoji">🟣</div>
+                    <h3>HBO Max</h3>
+                    <div class="price">$4.500 <span>/mes</span></div>
+                    <p class="description">Perfil completo HBO Max + TNT</p>
+                    <a href="https://dstv.store.link/product/max-x-perfil/hbo">Comprar</a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-emoji">📱</div>
+                    <h3>eSIM Activa</h3>
+                    <div class="price">$6.500 <span>/única</span></div>
+                    <p class="description">Lista para usar inmediatamente</p>
+                    <a href="https://dstv.store.link/product/esim-activa-lista-para-usar">Comprar</a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-emoji">📡</div>
+                    <h3>IPTV Premium</h3>
+                    <div class="price">$6.500 <span>/mes</span></div>
+                    <p class="description">Cuenta completa estable y estable</p>
+                    <a href="https://dstv.store.link/product/iptv/iptv">Comprar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>¿Listo para empezar?</h2>
+        <p>Unite a miles de clientes satisfechos y disfrutá del mejor streaming</p>
+        <a href="https://wa.me/56920050011" class="cta-button">Contactar por WhatsApp</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 DSTV. Todos los derechos reservados. | <a href="https://2tb.cl">www.dstv.cl</a></p>
+    </footer>
+</body>
+</html>
