@@ -3,448 +3,652 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSTV - Streaming Premium</title>
+    <title>DSTV Streaming</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #000;
-            color: #f5f5f7;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #f5f5f7;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover {
-            opacity: 1;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 6rem 2rem;
-            background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #fff 0%, #a8a8a8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: #86868b;
-            margin-bottom: 2.5rem;
-            font-weight: 400;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 980px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 40px rgba(102, 126, 234, 0.6);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 8rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #f5f5f7;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.1rem;
-            color: #86868b;
-            margin-bottom: 4rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(102, 126, 234, 0.5);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: #f5f5f7;
-        }
-
-        .feature-card p {
-            color: #86868b;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Products Section */
-        .products {
-            padding: 8rem 2rem;
-            background: linear-gradient(180deg, transparent 0%, rgba(102, 126, 234, 0.05) 50%, transparent 100%);
-        }
-
-        .products-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .product-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .product-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(102, 126, 234, 0.3);
-        }
-
-        .product-emoji {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .product-card h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-card .price {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 1rem 0;
-        }
-
-        .product-card .price span {
-            font-size: 1rem;
-            font-weight: 400;
-            -webkit-text-fill-color: #86868b;
-        }
-
-        .product-card .description {
-            color: #86868b;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .product-card a {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            background: rgba(102, 126, 234, 0.2);
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 980px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .product-card a:hover {
-            background: rgba(102, 126, 234, 0.3);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 8rem 2rem;
-            text-align: center;
-        }
-
-        .cta-section h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-section p {
-            font-size: 1.2rem;
-            color: #86868b;
-            margin-bottom: 2rem;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f5f7; color: #1d1d1f; }
+        
+        /* Top Bar */
+        .top-bar { background: #1a1a2e; color: #fff; text-align: center; padding: 8px; font-size: 13px; letter-spacing: 0.5px; }
+        
+        /* Nav */
+        nav { background: #fff; padding: 12px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 800; color: #1a1a2e; text-decoration: none; }
+        .nav-icons { display: flex; gap: 20px; align-items: center; }
+        .nav-icons a, .nav-icons button { color: #1d1d1f; text-decoration: none; font-size: 20px; background: none; border: none; cursor: pointer; }
+        .cart-btn { position: relative; }
+        .cart-count { position: absolute; top: -6px; right: -8px; background: #e3000f; color: #fff; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        
+        /* Hero Banner */
+        .hero-banner { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #1a1a2e 100%); padding: 60px 20px; text-align: center; color: #fff; }
+        .hero-banner h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; margin-bottom: 10px; letter-spacing: 2px; }
+        .hero-banner .subtitle { font-size: clamp(16px, 3vw, 24px); font-weight: 300; opacity: 0.9; }
+        .hero-banner .whatsapp { font-size: 14px; margin-top: 15px; opacity: 0.8; }
+        .hero-banner .whatsapp a { color: #fff; text-decoration: underline; }
+        
+        /* Sections */
+        .section { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+        .section-title { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 20px; color: #1d1d1f; }
+        .section-link { text-align: center; margin-bottom: 15px; }
+        .section-link a { color: #667eea; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .section-link a:hover { text-decoration: underline; }
+        .separator { border: none; border-top: 1px solid #d2d2d7; margin: 0; }
+        
+        /* Product Grid */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+        
+        /* Product Card */
+        .product-card { background: #fff; border-radius: 12px; overflow: hidden; transition: box-shadow 0.3s; border: 1px solid #e5e5e7; }
+        .product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .product-img { width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #fff; position: relative; }
+        .product-badge { position: absolute; top: 8px; right: 8px; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+        .badge-pantalla { background: #ff3b5c; color: #fff; }
+        .badge-cuenta { background: #34c759; color: #fff; }
+        .badge-licencia { background: #007aff; color: #fff; }
+        .badge-chip { background: #5856d6; color: #fff; }
+        .product-info { padding: 12px; }
+        .product-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; color: #1d1d1f; }
+        .product-desc { font-size: 12px; color: #86868b; margin-bottom: 8px; text-transform: lowercase; }
+        .product-prices { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .price-current { font-size: 18px; font-weight: 800; color: #e3000f; }
+        .price-old { font-size: 13px; color: #86868b; text-decoration: line-through; }
+        .product-btn { width: 100%; padding: 10px; background: #1a1a2e; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.3s; text-decoration: none; display: block; text-align: center; }
+        .product-btn:hover { background: #2d2d4a; }
+        .product-btn:disabled { background: #d2d2d7; color: #86868b; cursor: not-allowed; }
+        .product-btn.whatsapp { background: #25d366; }
+        .product-btn.whatsapp:hover { background: #1fb855; }
+        
         /* Footer */
-        footer {
-            padding: 3rem 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #86868b;
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
+        footer { background: #1a1a2e; color: #86868b; text-align: center; padding: 30px 20px; margin-top: 40px; }
+        footer a { color: #667eea; text-decoration: none; }
+        footer .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 15px; flex-wrap: wrap; }
+        footer .footer-links a { color: #f5f5f7; font-size: 13px; }
+        
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero {
-                padding: 4rem 1.5rem;
-            }
-            
-            .features, .products, .cta-section {
-                padding: 4rem 1.5rem;
-            }
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .product-img { height: 120px; font-size: 22px; }
+            .hero-banner { padding: 40px 15px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">Bienvenidos a nuestra tienda online de cuentas Streaming y demás</div>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">DSTV</div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#caracteristicas">Características</a></li>
-                <li><a href="https://2tb.cl/admin/crm_drilldown.php" target="_blank">Admin</a></li>
-            </ul>
+            <a href="#" class="logo">DSTV Streaming</a>
+            <div class="nav-icons">
+                <button title="Buscar">🔍</button>
+                <a href="https://2tb.cl/admin/crm_drilldown.php" target="_blank" title="Login">👤</a>
+                <a href="#" class="cart-btn" title="Carrito">
+                    🛒<span class="cart-count">0</span>
+                </a>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="inicio">
-        <div class="hero-content">
-            <h1>Streaming Premium al Mejor Precio</h1>
-            <p>Netflix, Disney+, HBO Max, Prime Video y más. Todo lo que necesitás en un solo lugar.</p>
-            <a href="#productos" class="cta-button">Ver Productos</a>
-        </div>
-    </section>
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+        <h1>BIENVENIDOS AL MUNDO DEL ENTRETENIMIENTO</h1>
+        <p class="subtitle">STREAMING</p>
+        <p class="whatsapp">Whatsapp +569 30003003 o al +569 20002001</p>
+    </div>
 
-    <!-- Features Section -->
-    <section class="features" id="caracteristicas">
-        <h2 class="section-title">¿Por qué elegirnos?</h2>
-        <p class="section-subtitle">La mejor experiencia de streaming con soporte 24/7</p>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Activación Instantánea</h3>
-                <p>Recibí tus cuentas al instante después del pago. Sin esperas, sin complicaciones.</p>
+    <!-- Section 1: Streaming x Perfil -->
+    <div class="section">
+        <div class="section-link"><a href="#">Ver todos</a></div>
+        <h2 class="section-title">Streaming de video - Venta x Perfil</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #e50914, #b20710);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    NETFLIX
+                </div>
+                <div class="product-info">
+                    <div class="product-name">NETFLIX</div>
+                    <div class="product-desc">netflix</div>
+                    <div class="product-prices"><span class="price-current">CL$3.990</span><span class="price-old">CL$5.000</span></div>
+                    <button class="product-btn" disabled>Agotado, NETFLIX</button>
+                </div>
             </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🛡️</div>
-                <h3>Garantía Total</h3>
-                <p>Todas nuestras cuentas incluyen garantía. Si hay algún problema, lo resolvemos al instante.</p>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #001a33, #003366);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    PRIME VIDEO
+                </div>
+                <div class="product-info">
+                    <div class="product-name">PRIME VIDEO x PERFIL</div>
+                    <div class="product-desc">prime</div>
+                    <div class="product-prices"><span class="price-current">CL$3.500</span><span class="price-old">CL$4.990</span></div>
+                    <a href="https://dstv.store.link/product/prime-video-x-perfil/prime" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
             </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">💰</div>
-                <h3>Mejores Precios</h3>
-                <p>Los precios más competitivos del mercado. Calidad premium a precios accesibles.</p>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #1a6b3c, #0078d4);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    DISNEY+
+                </div>
+                <div class="product-info">
+                    <div class="product-name">DISNEY PANTALLA</div>
+                    <div class="product-desc">disney-pantalla</div>
+                    <div class="product-prices"><span class="price-current">CL$3.990</span><span class="price-old">CL$11.990</span></div>
+                    <a href="https://dstv.store.link/product/disney-pantalla/disney-pantalla" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
             </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🎧</div>
-                <h3>Soporte 24/7</h3>
-                <p>Equipo de soporte disponible las 24 horas para ayudarte con cualquier consulta.</p>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #6e24a6, #2a0845);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    MAX + TNT
+                </div>
+                <div class="product-info">
+                    <div class="product-name">MAX + TNT - PERFIL</div>
+                    <div class="product-desc">hbomax-tnt</div>
+                    <div class="product-prices"><span class="price-current">CL$9.990</span><span class="price-old">CL$13.990</span></div>
+                    <a href="https://dstv.store.link/product/max-tnt-perfil/hbomax-tnt" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
             </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3>Multi-Dispositivo</h3>
-                <p>Compatible con Smart TV, celular, tablet, PC y decodificadores.</p>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    MAX X PERFIL
+                </div>
+                <div class="product-info">
+                    <div class="product-name">MAX X PERFIL</div>
+                    <div class="product-desc">hbo</div>
+                    <div class="product-prices"><span class="price-current">CL$3.990</span><span class="price-old">CL$5.500</span></div>
+                    <button class="product-btn" disabled>Agotado, MAX X PERFIL</button>
+                </div>
             </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>Pago Seguro</h3>
-                <p>Múltiples métodos de pago seguros: transferencia bancaria y pago online.</p>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    PARAMOUNT+
+                </div>
+                <div class="product-info">
+                    <div class="product-name">PARAMOUNT X PERFIL</div>
+                    <div class="product-desc">paramount</div>
+                    <div class="product-prices"><span class="price-current">CL$2.990</span><span class="price-old">CL$4.500</span></div>
+                    <button class="product-btn" disabled>Agotado, PARAMOUNT X PERFIL</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #e50914, #ff6b6b);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    CRUNCHYROLL
+                </div>
+                <div class="product-info">
+                    <div class="product-name">CRUNCHYROLL PANTALLA</div>
+                    <div class="product-desc">crunchyroll</div>
+                    <div class="product-prices"><span class="price-current">CL$3.500</span><span class="price-old">CL$6.500</span></div>
+                    <a href="https://dstv.store.link/product/crunchyroll-pantalla/crunchyroll" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #c0392b, #8e44ad);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    DAZN
+                </div>
+                <div class="product-info">
+                    <div class="product-name">DAZN X DISPOSITIVO</div>
+                    <div class="product-desc">dazn</div>
+                    <div class="product-prices"><span class="price-current">CL$5.990</span><span class="price-old">CL$29.990</span></div>
+                    <a href="#" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #2980b9, #3498db);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    UNIVERSAL+
+                </div>
+                <div class="product-info">
+                    <div class="product-name">UNIVERSAL PLUS X PERFIL</div>
+                    <div class="product-desc">universal</div>
+                    <div class="product-prices"><span class="price-current">CL$2.500</span><span class="price-old">CL$5.550</span></div>
+                    <a href="https://dstv.store.link/product/universal-plus-x-perfil/universal" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    FANATIZ
+                </div>
+                <div class="product-info">
+                    <div class="product-name">FANATIZ X PERFIL</div>
+                    <div class="product-desc">fanatiz</div>
+                    <div class="product-prices"><span class="price-current">CL$3.500</span><span class="price-old">CL$9.990</span></div>
+                    <a href="https://dstv.store.link/product/fanatiz-x-perfil/fanatiz" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    MEGA GO
+                </div>
+                <div class="product-info">
+                    <div class="product-name">MEGA GO X PERFIL</div>
+                    <div class="product-desc">mega-go</div>
+                    <div class="product-prices"><span class="price-current">CL$2.500</span><span class="price-old">CL$5.990</span></div>
+                    <button class="product-btn" disabled>Agotado, MEGA GO X PERFIL</button>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+    <hr class="separator">
 
-    <!-- Products Section -->
-    <section class="products" id="productos">
-        <div class="products-container">
-            <h2 class="section-title">Nuestros Productos</h2>
-            <p class="section-subtitle">Elige el plan que mejor se adapte a vos</p>
-            
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-emoji">🔴</div>
-                    <h3>Netflix</h3>
-                    <div class="price">$3.200 <span>/mes</span></div>
-                    <p class="description">Perfil completo para TV/Decodificador</p>
-                    <a href="https://dstv.store.link/product/netflix/netflix">Comprar</a>
+    <!-- Section 2: Cuenta Completa -->
+    <div class="section">
+        <div class="section-link"><a href="#">Ver todos</a></div>
+        <h2 class="section-title">Streaming de video - Cuenta Completa</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #6e24a6, #2a0845);">
+                    <span class="product-badge badge-cuenta">Cuenta Completa</span>
+                    TNT EN MAX
                 </div>
-                
-                <div class="product-card">
-                    <div class="product-emoji">🏰</div>
-                    <h3>Disney+</h3>
-                    <div class="price">$3.500 <span>/mes</span></div>
-                    <p class="description">Perfil completo con ESPN incluido</p>
-                    <a href="https://dstv.store.link/product/disney-pantalla/disney-pantalla">Comprar</a>
+                <div class="product-info">
+                    <div class="product-name">TNT EN MAX X CUENTA</div>
+                    <div class="product-desc">hbomax-tnt-full</div>
+                    <div class="product-prices"><span class="price-current">CL$8.990</span><span class="price-old">CL$13.990</span></div>
+                    <a href="https://dstv.store.link/product/tnt-en-max-x-cuenta/hbomax-tnt-full" class="product-btn" target="_blank">Agregar al carrito</a>
                 </div>
-                
-                <div class="product-card">
-                    <div class="product-emoji">🔹</div>
-                    <h3>Prime Video</h3>
-                    <div class="price">$2.990 <span>/mes</span></div>
-                    <p class="description">Perfil completo Amazon Prime</p>
-                    <a href="https://dstv.store.link/product/prime-video-x-perfil/prime">Comprar</a>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+                    <span class="product-badge badge-cuenta">Cuenta Completa</span>
+                    VIX+
                 </div>
-                
-                <div class="product-card">
-                    <div class="product-emoji">🟣</div>
-                    <h3>HBO Max</h3>
-                    <div class="price">$4.500 <span>/mes</span></div>
-                    <p class="description">Perfil completo HBO Max + TNT</p>
-                    <a href="https://dstv.store.link/product/max-x-perfil/hbo">Comprar</a>
+                <div class="product-info">
+                    <div class="product-name">VIX x CUENTA</div>
+                    <div class="product-desc">vix</div>
+                    <div class="product-prices"><span class="price-current">CL$3.990</span><span class="price-old">CL$9.990</span></div>
+                    <a href="https://dstv.store.link/product/vix-x-cuenta/vix" class="product-btn" target="_blank">Agregar al carrito</a>
                 </div>
-                
-                <div class="product-card">
-                    <div class="product-emoji">📱</div>
-                    <h3>eSIM Activa</h3>
-                    <div class="price">$6.500 <span>/única</span></div>
-                    <p class="description">Lista para usar inmediatamente</p>
-                    <a href="https://dstv.store.link/product/esim-activa-lista-para-usar">Comprar</a>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">
+                    <span class="product-badge badge-cuenta">Cuenta Completa</span>
+                    PARAMOUNT+
                 </div>
-                
-                <div class="product-card">
-                    <div class="product-emoji">📡</div>
-                    <h3>IPTV Premium</h3>
-                    <div class="price">$6.500 <span>/mes</span></div>
-                    <p class="description">Cuenta completa estable y estable</p>
-                    <a href="https://dstv.store.link/product/iptv/iptv">Comprar</a>
+                <div class="product-info">
+                    <div class="product-name">PARAMOUNT CUENTA COMPLETA</div>
+                    <div class="product-desc">paramount</div>
+                    <div class="product-prices"><span class="price-current">CL$19.990</span><span class="price-old">CL$40.990</span></div>
+                    <a href="https://dstv.store.link/product/paramount-x-cuenta/paramount-full" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #001a33, #003366);">
+                    <span class="product-badge badge-cuenta">Cuenta Completa</span>
+                    PRIMEVIDEO
+                </div>
+                <div class="product-info">
+                    <div class="product-name">PRIMEVIDEO CUENTA</div>
+                    <div class="product-desc">prime-full</div>
+                    <div class="product-prices"><span class="price-current">CL$5.990</span><span class="price-old">CL$6.990</span></div>
+                    <a href="https://dstv.store.link/product/primevideo-cuenta/prime-full" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #e50914, #b20710);">
+                    <span class="product-badge badge-cuenta">Cuenta Completa</span>
+                    NETFLIX
+                </div>
+                <div class="product-info">
+                    <div class="product-name">NETFLIX CUENTA</div>
+                    <div class="product-desc">netflix-full</div>
+                    <div class="product-prices"><span class="price-current">CL$8.500</span><span class="price-old">CL$12.990</span></div>
+                    <a href="https://dstv.store.link/product/netflix-cuenta/netflix-full" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                    <span class="product-badge badge-cuenta">Cuenta Completa</span>
+                    HBO MAX
+                </div>
+                <div class="product-info">
+                    <div class="product-name">HBO MAX CUENTA</div>
+                    <div class="product-desc">hbo-full</div>
+                    <div class="product-prices"><span class="price-current">CL$8.500</span><span class="price-old">CL$12.990</span></div>
+                    <a href="https://dstv.store.link/product/hbo-max-cuenta/hbo-full" class="product-btn" target="_blank">Agregar al carrito</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <hr class="separator">
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <h2>¿Listo para empezar?</h2>
-        <p>Unite a miles de clientes satisfechos y disfrutá del mejor streaming</p>
-        <a href="https://wa.me/56920050011" class="cta-button">Contactar por WhatsApp</a>
-    </section>
+    <!-- Section 3: TV Premium -->
+    <div class="section">
+        <div class="section-link"><a href="#">Ver todos</a></div>
+        <h2 class="section-title">TV Premium</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #2c3e50, #34495e);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    ZAPPING TV
+                </div>
+                <div class="product-info">
+                    <div class="product-name">ZAPPING TV + TNT</div>
+                    <div class="product-desc">zapping</div>
+                    <div class="product-prices"><span class="price-current">CL$5.490</span><span class="price-old">CL$6.500</span></div>
+                    <button class="product-btn" disabled>Agotado, ZAPPING TV + TNT</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+                    <span class="product-badge badge-cuenta">Cuenta Completa</span>
+                    IPTV
+                </div>
+                <div class="product-info">
+                    <div class="product-name">IPTV</div>
+                    <div class="product-desc">iptv</div>
+                    <div class="product-prices"><span class="price-current">CL$7.500</span><span class="price-old">CL$9.990</span></div>
+                    <a href="https://dstv.store.link/product/iptv/iptv" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #003049, #0077b6);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    MOVISTAR TV
+                </div>
+                <div class="product-info">
+                    <div class="product-name">MOVISTAR TV + TNT</div>
+                    <div class="product-desc">movistar</div>
+                    <div class="product-prices"><span class="price-current">CL$7.500</span><span class="price-old">CL$9.990</span></div>
+                    <a href="https://dstv.store.link/product/movistartv-perfil/movistar-tnt" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #003049, #023e8a);">
+                    <span class="product-badge badge-cuenta">Cuenta Completa</span>
+                    MOVISTAR TV
+                </div>
+                <div class="product-info">
+                    <div class="product-name">MOVISTAR TV CUENTA</div>
+                    <div class="product-desc">movistar-full</div>
+                    <div class="product-prices"><span class="price-current">CL$19.990</span><span class="price-old">CL$24.990</span></div>
+                    <a href="https://dstv.store.link/product/movistartv-cuenta/movistar-full" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #1a1a2e, #4a4e69);">
+                    <span class="product-badge badge-cuenta">Cuenta Completa</span>
+                    VTR PLAY
+                </div>
+                <div class="product-info">
+                    <div class="product-name">VTR PLAY + TNT + PLAYBOY</div>
+                    <div class="product-desc">vtr-playboy</div>
+                    <div class="product-prices"><span class="price-current">CL$18.500</span><span class="price-old">CL$22.990</span></div>
+                    <a href="https://dstv.store.link/product/vtr-play-x-cuenta/vtr-playboy" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #6e24a6, #2a0845);">
+                    <span class="product-badge badge-licencia">Anual</span>
+                    HBO + TNT
+                </div>
+                <div class="product-info">
+                    <div class="product-name">HBO MAX + TNT (ANUAL)</div>
+                    <div class="product-desc">hbomax_tnt_anual</div>
+                    <div class="product-prices"><span class="price-current">CL$39.990</span><span class="price-old">CL$59.990</span></div>
+                    <a href="https://dstv.store.link/product/hbo-max-tnt-x-1-a%C3%B1o/hbomax_tnt_anual" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #6e24a6, #4a0e4e);">
+                    <span class="product-badge badge-licencia">Anual</span>
+                    TNT EN HBO
+                </div>
+                <div class="product-info">
+                    <div class="product-name">TNT EN HBO (ANUAL)</div>
+                    <div class="product-desc">tnt-hbo-anual</div>
+                    <div class="product-prices"><span class="price-current">CL$29.990</span><span class="price-old">CL$45.990</span></div>
+                    <a href="https://dstv.store.link/product/tnt-en-hbo-x-1-a%C3%B1o/tnt-hbo-anual" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #1a1a2e, #e94560);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    DGO TV
+                </div>
+                <div class="product-info">
+                    <div class="product-name">DGO TV - DIRECTV GO</div>
+                    <div class="product-desc">directv-go</div>
+                    <div class="product-prices"><span class="price-current">CL$11.990</span><span class="price-old">CL$15.990</span></div>
+                    <a href="https://dstv.store.link/product/dgo-tv-directv-go/dgo-tv" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="separator">
+
+    <!-- Section 4: Software -->
+    <div class="section">
+        <div class="section-link"><a href="#">Ver todos</a></div>
+        <h2 class="section-title">Software y Productividad</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #d83b01, #ea4300);">
+                    <span class="product-badge badge-licencia">Licencia</span>
+                    OFFICE 365
+                </div>
+                <div class="product-info">
+                    <div class="product-name">OFFICE 365 (1 AÑO)</div>
+                    <div class="product-desc">office365-1a</div>
+                    <div class="product-prices"><span class="price-current">CL$14.990</span><span class="price-old">CL$19.990</span></div>
+                    <a href="https://dstv.store.link/product/offcice-365-x-1-a%C3%B1os/office365-1a" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #d83b01, #b52e01);">
+                    <span class="product-badge badge-licencia">Licencia</span>
+                    OFFICE 365
+                </div>
+                <div class="product-info">
+                    <div class="product-name">OFFICE 365 (3 AÑOS)</div>
+                    <div class="product-desc">office365-3a</div>
+                    <div class="product-prices"><span class="price-current">CL$21.990</span><span class="price-old">CL$29.990</span></div>
+                    <a href="https://dstv.store.link/product/office-365-x-3-a%C3%B1os/office365-3a" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #0078d4, #005a9e);">
+                    <span class="product-badge badge-licencia">Licencia</span>
+                    WINDOWS 11
+                </div>
+                <div class="product-info">
+                    <div class="product-name">WINDOWS 11 PRO</div>
+                    <div class="product-desc">windows11-pro</div>
+                    <div class="product-prices"><span class="price-current">CL$9.990</span><span class="price-old">CL$14.990</span></div>
+                    <a href="https://dstv.store.link/product/licencia-windows-11-pro-oem-para-1-pc/windows11-pro" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #7b2ff7, #5b1fd4);">
+                    <span class="product-badge badge-licencia">Licencia</span>
+                    CANVA PRO
+                </div>
+                <div class="product-info">
+                    <div class="product-name">CANVA PRO (1 AÑO)</div>
+                    <div class="product-desc">canva-3a</div>
+                    <div class="product-prices"><span class="price-current">CL$9.990</span><span class="price-old">CL$14.990</span></div>
+                    <a href="https://dstv.store.link/product/canvas-pro-5990/canva-3a" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #ff6b35, #f7931e);">
+                    <span class="product-badge badge-licencia">Licencia</span>
+                    CHATGPT
+                </div>
+                <div class="product-info">
+                    <div class="product-name">CHATGPT PREMIUM</div>
+                    <div class="product-desc">chatgpt-1m</div>
+                    <div class="product-prices"><span class="price-current">CL$9.990</span><span class="price-old">CL$14.990</span></div>
+                    <a href="https://dstv.store.link/product/chat-gpt-premium/chatgpt-1m" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #76b900, #5a8c00);">
+                    <span class="product-badge badge-licencia">Licencia</span>
+                    GEFORCE NOW
+                </div>
+                <div class="product-info">
+                    <div class="product-name">GEFORCE NOW</div>
+                    <div class="product-desc">geforce-1m</div>
+                    <div class="product-prices"><span class="price-current">CL$5.990</span><span class="price-old">CL$9.990</span></div>
+                    <a href="https://dstv.store.link/product/geforce-now-x-cuenta/geforce-1m" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="separator">
+
+    <!-- Section 5: Música -->
+    <div class="section">
+        <div class="section-link"><a href="#">Ver todos</a></div>
+        <h2 class="section-title">Música</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #1db954, #1ed760);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    SPOTIFY
+                </div>
+                <div class="product-info">
+                    <div class="product-name">SPOTIFY 1 MES</div>
+                    <div class="product-desc">spotify-1m</div>
+                    <div class="product-prices"><span class="price-current">CL$2.990</span><span class="price-old">CL$4.990</span></div>
+                    <a href="https://dstv.store.link/product/spotify-1m/SMARTV%20%2B%20DECODIFICADOR" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #ff0000, #cc0000);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    YOUTUBE
+                </div>
+                <div class="product-info">
+                    <div class="product-name">YOUTUBE PREMIUM 1 MES</div>
+                    <div class="product-desc">youtube-1m-compartido</div>
+                    <div class="product-prices"><span class="price-current">CL$3.500</span><span class="price-old">CL$5.990</span></div>
+                    <a href="https://dstv.store.link/product/youtube-1m-compartido/SMARTV%20%2B%20DECODIFICADOR%20%2B%20PC%20%2B%20CELULAR" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #ff0000, #990000);">
+                    <span class="product-badge badge-licencia">Anual</span>
+                    YOUTUBE
+                </div>
+                <div class="product-info">
+                    <div class="product-name">YOUTUBE PREMIUM (ANUAL)</div>
+                    <div class="product-desc">youtube-anual</div>
+                    <div class="product-prices"><span class="price-current">CL$39.990</span><span class="price-old">CL$59.990</span></div>
+                    <a href="https://dstv.store.link/product/youtube-anua-cuenta-nueva/SMARTV%20%2B%20DECODIFICADOR%20%2B%20PC%20%2B%20CELULAR" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="separator">
+
+    <!-- Section 6: eSIM -->
+    <div class="section">
+        <div class="section-link"><a href="#">Ver todos</a></div>
+        <h2 class="section-title">eSIM</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #007aff, #0055cc);">
+                    <span class="product-badge badge-chip">Chip Virtual</span>
+                    eSIM ACTIVA
+                </div>
+                <div class="product-info">
+                    <div class="product-name">eSIM ACTIVA (LISTA PARA USAR)</div>
+                    <div class="product-desc">esim-activa</div>
+                    <div class="product-prices"><span class="price-current">CL$6.500</span><span class="price-old">CL$9.990</span></div>
+                    <a href="https://dstv.store.link/product/esim-activa-lista-para-usar" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #5856d6, #3634a3);">
+                    <span class="product-badge badge-chip">Chip Virtual</span>
+                    eSIM NO ACTIVA
+                </div>
+                <div class="product-info">
+                    <div class="product-name">eSIM NO ACTIVA</div>
+                    <div class="product-desc">esim-no-activa</div>
+                    <div class="product-prices"><span class="price-current">CL$3.500</span><span class="price-old">CL$5.990</span></div>
+                    <a href="https://dstv.store.link/product/esim-no-activa" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="separator">
+
+    <!-- Section 7: VIP -->
+    <div class="section">
+        <div class="section-link"><a href="#">Ver todos</a></div>
+        <h2 class="section-title">Suscripciones VIP</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #ffd700, #ff8c00);">
+                    <span class="product-badge badge-licencia">VIP</span>
+                    ⭐ SUSCRIPCIÓN VIP
+                </div>
+                <div class="product-info">
+                    <div class="product-name">SUSCRIPCIÓN VIP MENSUAL</div>
+                    <div class="product-desc">suscripcion-vip</div>
+                    <div class="product-prices"><span class="price-current">CL$29.990</span><span class="price-old">CL$49.990</span></div>
+                    <a href="https://dstv.store.link/product/suscripcion-vip/SUSCRIPCIONVIP" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="separator">
+
+    <!-- Section 8: HotGo -->
+    <div class="section">
+        <div class="section-link"><a href="#">Ver todos</a></div>
+        <h2 class="section-title">Adulto</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #e91e63, #c2185b);">
+                    <span class="product-badge badge-pantalla">Pantalla</span>
+                    HOTGO
+                </div>
+                <div class="product-info">
+                    <div class="product-name">HOTGO X PERFIL</div>
+                    <div class="product-desc">hotgo-perfil</div>
+                    <div class="product-prices"><span class="price-current">CL$3.500</span><span class="price-old">CL$5.990</span></div>
+                    <a href="https://dstv.store.link/product/hotgo-x-perfil/SMARTV%20ANDROID%20%2B%20DECODIFICADOR%20ANDROID" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #ad1457, #880e4f);">
+                    <span class="product-badge badge-cuenta">Cuenta Completa</span>
+                    HOTGO
+                </div>
+                <div class="product-info">
+                    <div class="product-name">HOTGO X CUENTA</div>
+                    <div class="product-desc">hotgo-cuenta</div>
+                    <div class="product-prices"><span class="price-current">CL$5.990</span><span class="price-old">CL$8.990</span></div>
+                    <a href="https://dstv.store.link/product/hotgo-x-cuenta/SMARTV%20ANDROID%20%2B%20DECODIFICADOR%20ANDROID" class="product-btn" target="_blank">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 DSTV. Todos los derechos reservados. | <a href="https://2tb.cl">www.dstv.cl</a></p>
+        <div class="footer-links">
+            <a href="https://dstv.store.link">Tienda</a>
+            <a href="https://2tb.cl">Web Principal</a>
+            <a href="https://wa.me/56920002000">WhatsApp</a>
+            <a href="https://2tb.cl/admin/crm_drilldown.php">Admin CRM</a>
+        </div>
+        <p>&copy; 2026 DSTV Streaming. Todos los derechos reservados.</p>
     </footer>
+
 </body>
 </html>
